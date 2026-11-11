@@ -106,14 +106,76 @@ updateScrollProgress();
 
 const revealElements = [...document.querySelectorAll(".reveal, .badge-list span")];
 const scrollRevealTargets = [...document.querySelectorAll(
-  ".section-heading, .about-copy, .about-details, .detail-card, .currently-learning, .skill-card, .project-card, .contact-copy, .contact-form, .badge-list span"
+  ".section-heading, .about-copy, .about-details, .about-card, .detail-card, .currently-learning, .skill-card, .project-card, .contact-copy, .contact-form, .badge-list span"
 )];
 const motionGsap = window.gsap;
 const scrollPlugin = window.ScrollTrigger;
 let revealObserver = null;
 let scrollRevealsReady = false;
 
+function setupSkillFilters() {
+  const skillFilterButtons = [...document.querySelectorAll(".skill-filter")];
+  const skillCards = [...document.querySelectorAll(".skill-catalog .skill-card")];
+  if (!skillFilterButtons.length || skillFilterButtons[0].dataset.filtersReady) return;
+  skillFilterButtons[0].dataset.filtersReady = "true";
+
+  function filterSkills(category) {
+    const previousRects = new Map(skillCards.map((card) => [card, card.getBoundingClientRect()]));
+    skillCards.forEach((card) => {
+      card.hidden = category !== "all" && card.dataset.category !== category;
+    });
+    const visibleCards = skillCards.filter((card) => !card.hidden);
+
+    skillFilterButtons.forEach((button) => {
+      const active = button.dataset.filter === category;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    if (motionPreference.matches) return;
+    if (motionGsap) {
+      visibleCards.forEach((card) => {
+        const before = previousRects.get(card);
+        const after = card.getBoundingClientRect();
+        if (!before || !after.width || !after.height) return;
+        motionGsap.fromTo(card, {
+          x: before.left - after.left,
+          y: before.top - after.top,
+          scaleX: before.width / after.width,
+          scaleY: before.height / after.height,
+          autoAlpha: 0.78,
+          transformOrigin: "top left"
+        }, {
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+          autoAlpha: 1,
+          duration: 0.55,
+          delay: Math.min(visibleCards.indexOf(card), 5) * 0.045,
+          ease: "power3.out",
+          clearProps: "transform,opacity,visibility",
+          overwrite: "auto"
+        });
+      });
+      scrollPlugin?.refresh();
+    } else {
+      visibleCards.forEach((card, index) => {
+        card.style.setProperty("--filter-delay", `${index * 45}ms`);
+        card.classList.remove("filter-enter");
+        void card.offsetWidth;
+        card.classList.add("filter-enter");
+      });
+    }
+  }
+
+  skillFilterButtons.forEach((button) => {
+    button.addEventListener("click", () => filterSkills(button.dataset.filter));
+  });
+}
+
 function setupScrollReveals() {
+  setupSkillFilters();
   if (motionPreference.matches) {
     revealObserver?.disconnect();
     revealObserver = null;
@@ -132,7 +194,7 @@ function setupScrollReveals() {
     motionGsap.registerPlugin(scrollPlugin);
     document.querySelectorAll(".section").forEach((section) => {
       const targets = section.querySelectorAll(
-        ".section-heading, .about-copy, .about-details, .detail-card, .currently-learning, .skill-card, .project-card, .contact-copy, .contact-form"
+        ".section-heading, .about-copy, .about-details, .about-card, .detail-card, .currently-learning, .skill-card, .project-card, .contact-copy, .contact-form"
       );
       if (targets.length) {
         motionGsap.fromTo(targets, {
@@ -166,6 +228,7 @@ function setupScrollReveals() {
           scrollTrigger: { trigger: list.closest(".skill-card"), start: "top 76%", once: true }
         });
       });
+
     });
     return;
   }
@@ -185,6 +248,7 @@ function setupScrollReveals() {
     scrollRevealsReady = true;
     revealElements.forEach((element) => element.classList.add("is-visible"));
   }
+
 }
 
 const typedRole = document.querySelector(".typed-role");
@@ -537,6 +601,7 @@ function startParticleAnimation() {
 
 const canTiltCards = window.matchMedia("(hover: hover) and (pointer: fine)");
 const projectCards = [...document.querySelectorAll(".project-card")];
+const skillCards = [...document.querySelectorAll(".skill-catalog .skill-card")];
 const heroArt = document.querySelector(".hero-art");
 const magneticButtons = [...document.querySelectorAll(".button-primary, .project-links a")];
 const cursorFollower = document.querySelector(".cursor-follower");
@@ -570,6 +635,33 @@ projectCards.forEach((card) => {
       tiltY(0);
       motionGsap.to(card, { y: 0, scale: 1, duration: 0.65, ease: "elastic.out(1, 0.72)", overwrite: "auto" });
     }
+  });
+});
+
+skillCards.forEach((card) => {
+  const tiltX = motionGsap?.quickTo(card, "rotationX", { duration: 0.4, ease: "power2.out" });
+  const tiltY = motionGsap?.quickTo(card, "rotationY", { duration: 0.4, ease: "power2.out" });
+
+  card.addEventListener("pointermove", (event) => {
+    if (!canTiltCards.matches || motionPreference.matches || !motionGsap || event.pointerType === "touch") return;
+    const bounds = card.getBoundingClientRect();
+    const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
+    card.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+    card.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+    const firstMove = !card.classList.contains("is-tilting");
+    card.classList.add("is-tilting");
+    tiltY(horizontal * 12);
+    tiltX(vertical * -10);
+    if (firstMove) motionGsap.to(card, { y: -7, scale: 1.012, transformPerspective: 1000, duration: 0.3, ease: "power2.out", overwrite: "auto" });
+  });
+
+  card.addEventListener("pointerleave", () => {
+    card.classList.remove("is-tilting");
+    if (!motionGsap) return;
+    tiltX(0);
+    tiltY(0);
+    motionGsap.to(card, { y: 0, scale: 1, duration: 0.65, ease: "elastic.out(1, 0.72)", overwrite: "auto" });
   });
 });
 
@@ -680,13 +772,17 @@ function updateMotionPreference() {
     motionGsap?.killTweensOf(revealElements);
     motionGsap?.killTweensOf(document.querySelectorAll(".hero-word, .eyebrow, .hero-intro, .hero-role, .hero-bio, .hero-actions, .hero-socials"));
     if (scrollPlugin && motionGsap) scrollPlugin.getAll().forEach((trigger) => trigger.kill());
-    motionGsap?.killTweensOf(projectCards);
+    motionGsap?.killTweensOf([...projectCards, ...skillCards]);
     motionGsap?.killTweensOf(heroArt);
     motionGsap?.killTweensOf(document.querySelectorAll(".tech-badge"));
     motionGsap?.set(scrollRevealTargets, { autoAlpha: 1, clearProps: "transform" });
     motionGsap?.set(document.querySelectorAll(".hero-word, .eyebrow, .hero-intro, .hero-role, .hero-bio, .hero-actions, .hero-socials"), { autoAlpha: 1, clearProps: "transform" });
     motionGsap?.set(document.querySelectorAll(".tech-badge"), { clearProps: "transform" });
     projectCards.forEach((card) => {
+      motionGsap?.set(card, { clearProps: "transform" });
+      card.classList.remove("is-tilting");
+    });
+    skillCards.forEach((card) => {
       motionGsap?.set(card, { clearProps: "transform" });
       card.classList.remove("is-tilting");
     });

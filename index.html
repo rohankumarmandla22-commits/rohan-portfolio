@@ -107,28 +107,23 @@
             <p class="section-kicker">A LITTLE ABOUT ME <span>01</span></p>
             <h2 id="about-title">Building things, <span>learning always.</span></h2>
           </div>
-          <div class="about-grid">
-            <div class="about-copy reveal">
-              <p class="large-copy">I'm a computer science student who loves the space where thoughtful design meets well-crafted code.</p>
-              <p>From my first tiny web page to the projects I build today, I've always been driven by the same question: how can technology make someone's day a little better? I enjoy collaborating, breaking down tricky problems, and shipping things that feel good to use.</p>
-              <p>Outside the editor, you'll find me sketching ideas, reading about emerging tech, or looking for a new coffee spot to work from.</p>
-            </div>
-            <div class="about-details reveal">
-              <div class="detail-card">
-                <span class="detail-icon">⌘</span>
-                <div><p class="detail-label">EDUCATION</p><h3>B.Tech in Computer Science</h3><p>JOY UNIVERSITY</p></div>
-                <span class="detail-date">IN PROGRESS</span>
+          <div class="about-bento">
+            <article class="about-card about-bio reveal">
+              <div class="bento-card-head"><span class="bento-icon" aria-hidden="true">01</span><span class="detail-label">THE JOURNEY SO FAR</span><span class="bento-spark" aria-hidden="true">✳</span></div>
+              <h3>Learning by<br /><span>building and practicing.</span></h3>
+              <p class="large-copy">I'm Rohan Kumar Mandla, currently pursuing my B.Tech in Computer Science at JOY UNIVERSITY.</p>
+              <p>I'm building practical web applications and practicing Data Structures &amp; Algorithms to strengthen my full-stack development skills.</p>
+              <div class="bento-tags"><span>WEB APPLICATIONS</span><span>DSA PRACTICE</span></div>
+            </article>
+            <article class="about-card about-stats reveal" aria-label="About highlights">
+              <div class="bento-card-head"><span class="bento-icon" aria-hidden="true">02</span><span class="detail-label">ABOUT HIGHLIGHTS</span></div>
+              <div class="stat-list">
+                <div class="stat-item"><span class="highlight-label">Education</span><span>B.Tech CSE — JOY UNIVERSITY</span></div>
+                <div class="stat-item"><span class="highlight-label">Projects Built</span><span>3 Deployed Web Apps</span></div>
+                <div class="stat-item"><span class="highlight-label">Current Focus</span><span>Full-Stack Web Development &amp; DSA</span></div>
               </div>
-              <div class="detail-card">
-                <span class="detail-icon">↗</span>
-                <div><p class="detail-label">RIGHT NOW</p><h3>Learning in public</h3><p>LLM applications, system design &amp; TypeScript</p></div>
-                <span class="detail-date">2025—26</span>
-              </div>
-              <div class="currently-learning">
-                <span class="pulse-dot"></span>
-                <div><p class="detail-label">CURRENTLY EXPLORING</p><p>RAG pipelines <span>·</span> Next.js <span>·</span> Cloud fundamentals</p></div>
-              </div>
-            </div>
+              <p class="stat-footnote"><span class="pulse-dot"></span> Currently studying and building.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -140,27 +135,49 @@
             <h2 id="skills-title">Tools of the <span>trade.</span></h2>
             <p class="section-subtitle">A growing toolbox for bringing ideas to life.</p>
           </div>
-          <div class="skills-grid">
-            <article class="skill-card reveal">
-              <div class="skill-card-top"><span class="skill-symbol">&lt;/&gt;</span><span class="skill-index">01</span></div>
-              <h3>Frontend</h3><p>Interfaces that feel as good as they look.</p>
-              <div class="badge-list"><span>React</span><span>Next.js</span><span>TypeScript</span><span>HTML &amp; CSS</span><span>Tailwind</span></div>
+          <div class="skill-filters" role="group" aria-label="Filter skills">
+            <button type="button" class="skill-filter is-active" data-filter="all" aria-pressed="true">All <span>6</span></button>
+            <button type="button" class="skill-filter" data-filter="web" aria-pressed="false">Web Development <span>3</span></button>
+            <button type="button" class="skill-filter" data-filter="programming" aria-pressed="false">Programming &amp; DSA <span>2</span></button>
+            <button type="button" class="skill-filter" data-filter="tools" aria-pressed="false">Tools <span>1</span></button>
+          </div>
+          <div class="skills-grid skill-catalog">
+            <article class="skill-card reveal" data-category="web">
+              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5-6 7 6 7M16 5l6 7-6 7M14 3l-4 18"/></svg></span><span class="skill-index">01 / WEB</span></div>
+              <h3>HTML5</h3><p>Markup for the Job Tracker &amp; Portfolio.</p>
+              <div class="skill-context"><span class="context-dot"></span><span>Used in Job Tracker &amp; Portfolio</span></div>
             </article>
-            <article class="skill-card reveal">
-              <div class="skill-card-top"><span class="skill-symbol">{ }</span><span class="skill-index">02</span></div>
-              <h3>Backend</h3><p>Reliable foundations behind the scenes.</p>
-              <div class="badge-list"><span>Node.js</span><span>Express</span><span>Python</span><span>PostgreSQL</span><span>REST APIs</span></div>
+            <article class="skill-card reveal" data-category="web">
+              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 9 5-1.5 11L12 22l-7.5-4L3 7l9-5Z"/><path d="m8 9 8 6m0-6-8 6"/></svg></span><span class="skill-index">02 / FRONTEND</span></div>
+              <h3>CSS3</h3><p>Styling and responsive layouts for web projects.</p>
+              <div class="skill-context"><span class="context-dot"></span><span>Used in Job Tracker &amp; Portfolio</span></div>
             </article>
-            <article class="skill-card reveal">
-              <div class="skill-card-top"><span class="skill-symbol">⌘</span><span class="skill-index">03</span></div>
-              <h3>Tools</h3><p>My everyday kit for shipping better work.</p>
-              <div class="badge-list"><span>Git &amp; GitHub</span><span>Figma</span><span>Docker</span><span>VS Code</span><span>Vercel</span></div>
+            <article class="skill-card reveal" data-category="web">
+              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-2-13-3 18"/></svg></span><span class="skill-index">03 / FRONTEND</span></div>
+              <h3>JavaScript</h3><p>Browser interactions and application behavior.</p>
+              <div class="skill-context"><span class="context-dot"></span><span>App logic &amp; Sorting Visualizer</span></div>
             </article>
-            <article class="skill-card reveal">
-              <div class="skill-card-top"><span class="skill-symbol">Aa</span><span class="skill-index">04</span></div>
-              <h3>Languages</h3><p>Different ways to express a good idea.</p>
-              <div class="badge-list"><span>JavaScript</span><span>TypeScript</span><span>Python</span><span>Java</span><span>SQL</span></div>
+            <article class="skill-card reveal" data-category="programming">
+              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5 3 12l5 7m8-14 5 7-5 7m-3-16-2 18"/></svg></span><span class="skill-index">04 / PROGRAMMING</span></div>
+              <h3>Python</h3><p>Used for scripting and learning through programming practice.</p>
+              <div class="skill-context"><span class="context-dot"></span><span>Scripting &amp; Problem Solving</span></div>
             </article>
+            <article class="skill-card reveal" data-category="programming">
+              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-4 0-3.7 1.8-3.7 1.8v2h3.8v.8H6.8S4 7.3 4 12s2.5 4.7 2.5 4.7h1.5v-2s-.1-2.5 2.5-2.5h4.2s2.3 0 2.3-2.3V7S17.4 3 12 3Z"/><path d="M12.5 21c4 0 3.7-1.8 3.7-1.8v-2h-3.8v-.8h5.3s2.8.3 2.8-4.4-2.5-4.7-2.5-4.7h-1.5v2s.1 2.5-2.5 2.5h-4.2s-2.3 0-2.3 2.3V17s-.4 4 5 4Z"/></svg></span><span class="skill-index">05 / PROGRAMMING</span></div>
+              <h3>Data Structures &amp; Algorithms</h3><p>Practicing algorithmic problem solving.</p>
+              <div class="skill-context"><span class="context-dot"></span><span>Core Logic &amp; Sorting Visualizer</span></div>
+            </article>
+            <article class="skill-card reveal" data-category="tools">
+              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 8v5a3 3 0 0 0 6 0V8m0 5 4 4"/></svg></span><span class="skill-index">06 / TOOLS</span></div>
+              <h3>Git &amp; GitHub</h3><p>Version control and publishing projects.</p>
+              <div class="skill-context"><span class="context-dot"></span><span>Version Control &amp; GitHub Pages</span></div>
+            </article>
+          </div>
+          <div class="skill-marquee" aria-label="Core technology stack">
+            <div class="skill-marquee-track" aria-hidden="true">
+              <span>HTML5</span><i>✳</i><span>CSS3</span><i>✳</i><span>JavaScript</span><i>✳</i><span>Python</span><i>✳</i><span>Data Structures &amp; Algorithms</span><i>✳</i><span>Git &amp; GitHub</span><i>✳</i>
+              <span>HTML5</span><i>✳</i><span>CSS3</span><i>✳</i><span>JavaScript</span><i>✳</i><span>Python</span><i>✳</i><span>Data Structures &amp; Algorithms</span><i>✳</i><span>Git &amp; GitHub</span><i>✳</i>
+            </div>
           </div>
         </div>
       </section>
