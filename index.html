@@ -16,6 +16,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -46,11 +48,15 @@
     <main id="main">
       <section class="hero shell" aria-labelledby="hero-title">
         <canvas class="hero-particles" aria-hidden="true"></canvas>
+        <div class="cursor-follower" aria-hidden="true"><span></span></div>
         <div class="hero-copy">
           <div class="eyebrow"><span class="status-dot"></span> AVAILABLE FOR INTERNSHIPS</div>
           <p class="hero-intro">Hi, I'm <span>Rohan Kumar Mandla.</span></p>
-          <h1 id="hero-title">Full-Stack Developer<br />&amp; <span class="accent-text">AI Enthusiast</span></h1>
-          <p class="hero-role"><span class="role-label">Curious about</span> <span class="sr-only">Full-Stack Developer, Problem Solver, and AI Enthusiast</span><span class="typed-role" aria-hidden="true">Full-Stack Developer</span><span class="typing-cursor" aria-hidden="true"></span></p>
+          <h1 id="hero-title" aria-label="Full-Stack Developer & AI Enthusiast" tabindex="0">
+            <span class="hero-title-line" aria-hidden="true"><span class="hero-word">Full-Stack</span> <span class="hero-word">Developer</span></span>
+            <span class="hero-title-line" aria-hidden="true"><span class="hero-word">&amp;</span> <span class="hero-word accent-text">AI</span> <span class="hero-word accent-text">Enthusiast</span></span>
+          </h1>
+          <p class="hero-role"><span class="role-label">I build</span> <span class="sr-only">Full-Stack Developer, Problem Solver, and AI Enthusiast</span><span class="typed-role" aria-hidden="true">useful products</span><span class="typing-cursor" aria-hidden="true"></span></p>
           <p class="hero-bio">
             I turn curious ideas into useful digital experiences.<br class="desktop-break" />
             Currently studying computer science and building for the web.
@@ -70,19 +76,27 @@
             <a href="mailto:rohankumarmanda22@gmail.com">Email <span>↗</span></a>
           </div>
         </div>
-        <div class="hero-art" aria-label="Abstract illustration of a developer workspace">
+        <div class="hero-art" aria-label="Interactive floating code terminal surrounded by technology badges">
           <div class="art-grid"></div>
           <div class="orbit orbit-one"></div>
           <div class="orbit orbit-two"></div>
-          <div class="orbit-core"><span>&lt;</span><b>/</b><span>&gt;</span></div>
-          <div class="float-card float-card-code">
-            <span class="card-dots"><i></i><i></i><i></i></span>
-            <code><span>const</span> build = <em>() =&gt;</em> {</code>
-            <code class="indent">makeIt <strong>useful</strong>();</code>
-            <code>}</code>
+          <div class="terminal-card">
+            <div class="terminal-header"><span class="card-dots"><i></i><i></i><i></i></span><span>ROHAN.DEV / TERMINAL</span><span class="terminal-live">● LIVE</span></div>
+            <div class="terminal-body">
+              <p><span class="terminal-prompt">~/portfolio $</span> <span class="terminal-command">build --future</span></p>
+              <p><span class="terminal-muted">const</span> ideas = <span class="terminal-cyan">curiosity</span>;</p>
+              <p><span class="terminal-muted">while</span> (learning) {</p>
+              <p class="terminal-indent">ship(ideas.<span class="terminal-lime">useful</span>());</p>
+              <p>}</p>
+              <div class="terminal-output"><span class="terminal-check">✓</span> ready for what's next<span class="terminal-caret"></span></div>
+            </div>
           </div>
-          <div class="float-card float-card-ai"><span class="spark">✳</span> curious by default</div>
-          <div class="art-caption"><span>01 / 04</span><span>DESIGN · CODE · LEARN</span></div>
+          <div class="tech-badge tech-html"><span>&lt;/&gt;</span> HTML</div>
+          <div class="tech-badge tech-js"><span>JS</span> JavaScript</div>
+          <div class="tech-badge tech-python"><span>Py</span> Python</div>
+          <div class="tech-badge tech-ai"><span>✳</span> AI</div>
+          <div class="tech-badge tech-git"><span>⑂</span> Git</div>
+          <div class="art-caption"><span>BUILD · EXPLORE · REPEAT</span><span>ROHAN / 2026</span></div>
         </div>
         <a class="scroll-cue" href="#about"><span></span> SCROLL TO EXPLORE</a>
       </section>
