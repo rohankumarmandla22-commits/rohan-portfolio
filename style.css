@@ -1029,3 +1029,280 @@ h2 em { color: #a7c3f6; font-style: normal; }
   .site-toast { transition: none !important; }
 }
 @keyframes telemetry-pulse { 50% { opacity: .4; box-shadow: 0 0 2px var(--green); } }
+
+/* Motion details: clipped typography, organic aurora, and scroll-linked traces. */
+@property --marquee-duration {
+  syntax: "<time>";
+  inherits: false;
+  initial-value: 36s;
+}
+
+.hero,
+.section,
+.contact-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero > :not(.aurora-field):not(.circuit-trace),
+.section > .shell,
+.contact-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.aurora-field {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  opacity: .62;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  transform-origin: center;
+  opacity: .82;
+  will-change: d;
+}
+
+.aurora-blob-secondary {
+  opacity: .6;
+}
+
+.projects-aurora {
+  opacity: .52;
+}
+
+.hero-title-line {
+  display: block;
+  overflow: clip;
+  padding-block: .065em;
+  margin-block: -.065em;
+  background-image: linear-gradient(105deg, #f5f7fb 3%, #c4d9ff 31%, #ffffff 48%, #6bd5ed 69%, #f5f7fb 92%);
+  background-size: 230% 100%;
+  background-position: 100% 50%;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: headline-light-sweep 8s ease-in-out infinite;
+}
+
+.hero h1 em {
+  background-image: linear-gradient(108deg, #a9c8ff 0%, #f5f7fb 35%, #67d9ec 62%, #a9c8ff 100%);
+  background-size: 230% 100%;
+  background-position: 100% 50%;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: headline-light-sweep 7s ease-in-out infinite reverse;
+}
+
+@keyframes headline-light-sweep {
+  0%, 12% { background-position: 100% 50%; }
+  70%, 100% { background-position: 0% 50%; }
+}
+
+.circuit-trace {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  bottom: -23px;
+  left: 0;
+  width: 100%;
+  height: 46px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.circuit-path {
+  fill: none;
+  stroke: rgb(105 173 255 / 54%);
+  stroke-width: 1;
+  stroke-dasharray: 1 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgb(66 133 244 / 72%));
+  opacity: .42;
+  vector-effect: non-scaling-stroke;
+}
+
+.data-packet {
+  fill: #b7ecff;
+  filter: drop-shadow(0 0 5px #55c9ff) drop-shadow(0 0 10px #4285f4);
+  pointer-events: none;
+}
+
+.tech-marquee {
+  --marquee-duration: 36s;
+  display: grid;
+  gap: 10px;
+  margin-top: 30px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.tech-marquee-row {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tech-marquee-track,
+.tech-marquee-group {
+  display: flex;
+  width: max-content;
+  align-items: center;
+}
+
+.tech-marquee-track {
+  gap: 12px;
+  animation: marquee-drift var(--marquee-duration, 36s) linear infinite;
+  transition: --marquee-duration .6s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform;
+}
+
+.tech-marquee-group {
+  flex: 0 0 auto;
+  gap: 12px;
+}
+
+.tech-marquee-group > span {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 14px;
+  border: 1px solid rgb(126 171 255 / 19%);
+  border-radius: 999px;
+  background: linear-gradient(120deg, rgb(255 255 255 / 4%), rgb(66 133 244 / 5%));
+  color: #b7c8df;
+  font: 8px var(--mono);
+  letter-spacing: .06em;
+  white-space: nowrap;
+  box-shadow: inset 0 1px rgb(255 255 255 / 3%);
+  transition: border-color .25s, color .25s, box-shadow .25s, transform .25s;
+}
+
+.tech-marquee-group > span:hover {
+  transform: translateY(-2px);
+  border-color: rgb(36 193 224 / 52%);
+  color: #e4f6ff;
+  box-shadow: 0 0 18px rgb(36 193 224 / 12%);
+}
+
+.tech-marquee-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee-drift {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.project-card,
+.skill-card,
+.portrait-frame,
+.ai-status-card {
+  transition-property: border-color, box-shadow, background-color;
+}
+
+.project-card,
+.skill-card,
+.portrait-frame,
+.ai-status-card {
+  --glare-x: 50%;
+  --glare-y: 50%;
+}
+
+.project-card { transition: translate .38s cubic-bezier(.2, .8, .2, 1), border-color .25s, box-shadow .25s; }
+.skill-card { transition: translate .32s cubic-bezier(.2, .8, .2, 1), border-color .25s, box-shadow .25s, opacity .22s ease, visibility 0s; }
+.project-card:hover,
+.project-card:focus-within {
+  translate: 0 -5px;
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.skill-card:hover,
+.skill-card:focus-visible,
+.skill-card.is-spotlit {
+  translate: 0 -4px;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.tilt-glare {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at var(--glare-x, 50%) var(--glare-y, 50%), rgb(131 203 255 / 24%), transparent 58%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity .24s ease;
+}
+
+.project-card:hover .tilt-glare,
+.project-card:focus-within .tilt-glare,
+.skill-card:hover .tilt-glare,
+.skill-card:focus-visible .tilt-glare,
+.portrait-frame:hover .tilt-glare,
+.portrait-frame:focus-visible .tilt-glare,
+.ai-status-card:hover .tilt-glare {
+  opacity: .78;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card,
+  .skill-card,
+  .portrait-frame,
+  .ai-status-card {
+    will-change: transform;
+    transition-duration: .38s, .25s, .25s;
+  }
+}
+
+@media (max-width: 700px) {
+  .circuit-trace { bottom: -18px; height: 36px; }
+  .tech-marquee { gap: 8px; margin-top: 24px; }
+  .tech-marquee-track,
+  .tech-marquee-group { gap: 8px; }
+  .tech-marquee-group > span { min-height: 31px; padding-inline: 11px; font-size: 7px; }
+}
+
+.page-hidden .hero-title-line,
+.page-hidden .hero h1 em,
+.page-hidden .tech-marquee-track,
+.page-hidden .job-columns i,
+.page-hidden .sorting-bars i,
+.page-hidden .pomodoro,
+.page-hidden .pomodoro::after,
+.page-hidden .snapshot-orbit,
+.page-hidden .repo-status::before {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-field { opacity: .24; }
+  .hero-title-line,
+  .hero h1 em { animation: none !important; background-position: 50% 50%; }
+  .circuit-trace { opacity: .45; }
+  .data-packet { display: none; }
+  .tech-marquee-track { animation: none !important; transition: none !important; transform: none !important; }
+  .tilt-glare { display: none; }
+  .project-card,
+  .skill-card,
+  .portrait-frame,
+  .ai-status-card {
+    transition: none !important;
+    transform: none !important;
+    translate: none !important;
+    will-change: auto;
+  }
+  .project-card:hover,
+  .project-card:focus-within,
+  .skill-card:hover,
+  .skill-card:focus-visible {
+    transform: none !important;
+  }
+}

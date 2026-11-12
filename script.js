@@ -154,20 +154,113 @@ fetch("https://api.github.com/users/rohankumarmandla22-commits", {
   });
 
 const tiltTargets = [...document.querySelectorAll("[data-tilt]")];
+const tiltStates = new Map(tiltTargets.map((target) => {
+  const glare = document.createElement("span");
+  glare.className = "tilt-glare";
+  glare.setAttribute("aria-hidden", "true");
+  target.append(glare);
+  return [target, {
+    x: 0, y: 0, vx: 0, vy: 0, vgx: 0, vgy: 0, targetX: 0, targetY: 0,
+    glareX: 50, glareY: 50, targetGlareX: 50, targetGlareY: 50, active: false
+  }];
+}));
+let tiltFrame = 0;
+let lastTiltFrame = 0;
+
+function animateTilts(now) {
+  tiltFrame = 0;
+  const delta = Math.min((now - (lastTiltFrame || now - 16.67)) / 1000, 0.034);
+  lastTiltFrame = now;
+  let needsAnotherFrame = false;
+  tiltStates.forEach((state, target) => {
+    if (!state.active) return;
+    const stiffness = 175;
+    const damping = 24;
+    const ax = (state.targetX - state.x) * stiffness - state.vx * damping;
+    const ay = (state.targetY - state.y) * stiffness - state.vy * damping;
+    const agx = (state.targetGlareX - state.glareX) * stiffness - state.vgx * damping;
+    const agy = (state.targetGlareY - state.glareY) * stiffness - state.vgy * damping;
+    state.vx += ax * delta;
+    state.vy += ay * delta;
+    state.vgx += agx * delta;
+    state.vgy += agy * delta;
+    state.x += state.vx * delta;
+    state.y += state.vy * delta;
+    state.glareX += state.vgx * delta;
+    state.glareY += state.vgy * delta;
+    target.style.setProperty("--tilt-x", `${state.x.toFixed(2)}deg`);
+    target.style.setProperty("--tilt-y", `${state.y.toFixed(2)}deg`);
+    target.style.setProperty("--glare-x", `${state.glareX.toFixed(1)}%`);
+    target.style.setProperty("--glare-y", `${state.glareY.toFixed(1)}%`);
+
+    const settled = Math.abs(state.targetX - state.x) < 0.025 &&
+      Math.abs(state.targetY - state.y) < 0.025 &&
+      Math.abs(state.targetGlareX - state.glareX) < 0.1 &&
+      Math.abs(state.targetGlareY - state.glareY) < 0.1 &&
+      Math.abs(state.vx) < 0.025 && Math.abs(state.vy) < 0.025 &&
+      Math.abs(state.vgx) < 0.05 && Math.abs(state.vgy) < 0.05;
+    if (settled) {
+      state.x = state.targetX;
+      state.y = state.targetY;
+      state.glareX = state.targetGlareX;
+      state.glareY = state.targetGlareY;
+      state.vx = 0;
+      state.vy = 0;
+      state.vgx = 0;
+      state.vgy = 0;
+      state.active = false;
+    } else {
+      needsAnotherFrame = true;
+    }
+  });
+  if (needsAnotherFrame) tiltFrame = window.requestAnimationFrame(animateTilts);
+  else lastTiltFrame = 0;
+}
+
+function scheduleTiltFrame() {
+  if (!tiltFrame) tiltFrame = window.requestAnimationFrame(animateTilts);
+}
+
 tiltTargets.forEach((target) => {
+  const state = tiltStates.get(target);
   target.addEventListener("pointermove", (event) => {
     if (!finePointer.matches || reducedMotion.matches || event.pointerType === "touch") return;
     const bounds = target.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    target.style.setProperty("--tilt-x", `${-y * 7}deg`);
-    target.style.setProperty("--tilt-y", `${x * 9}deg`);
+    state.targetX = -y * 9;
+    state.targetY = x * 12;
+    state.targetGlareX = (x + 0.5) * 100;
+    state.targetGlareY = (y + 0.5) * 100;
+    state.active = true;
+    scheduleTiltFrame();
   });
   target.addEventListener("pointerleave", () => {
-    target.style.setProperty("--tilt-x", "0deg");
-    target.style.setProperty("--tilt-y", "0deg");
+    state.targetX = 0;
+    state.targetY = 0;
+    state.targetGlareX = 50;
+    state.targetGlareY = 50;
+    state.active = true;
+    scheduleTiltFrame();
   });
 });
+
+const techMarquee = document.querySelector(".tech-marquee");
+if (techMarquee) {
+  const marqueeTracks = [...techMarquee.querySelectorAll(".tech-marquee-track")];
+  marqueeTracks.forEach((track, index) => {
+    const regularSpeed = index === 0 ? "36s" : "44s";
+    track.style.setProperty("--marquee-duration", regularSpeed);
+    track.dataset.regularSpeed = regularSpeed;
+  });
+  techMarquee.addEventListener("pointerenter", () => {
+    if (reducedMotion.matches) return;
+    marqueeTracks.forEach((track) => track.style.setProperty("--marquee-duration", "82s"));
+  });
+  techMarquee.addEventListener("pointerleave", () => {
+    marqueeTracks.forEach((track) => track.style.setProperty("--marquee-duration", track.dataset.regularSpeed));
+  });
+}
 
 const skillCards = [...document.querySelectorAll(".skill-card")];
 const skillFilters = [...document.querySelectorAll(".skill-filter")];
@@ -374,6 +467,57 @@ let scrollBlend = 0;
 let lastFrameTime = 0;
 let activeCursorTarget = null;
 let activeCursorLabel = "";
+const morphingBlobs = [...document.querySelectorAll("[data-morph-blob]")].map((element) => {
+  const [x, y, radius, amplitude, speed] = element.dataset.morphBlob.split(",").map(Number);
+  return { element, x, y, radius, amplitude, speed };
+});
+const circuitTraces = [...document.querySelectorAll(".circuit-trace")].map((svg) => {
+  const path = svg.querySelector(".circuit-path");
+  return {
+    path,
+    packet: svg.querySelector(".data-packet"),
+    section: svg.closest("section"),
+    length: path.getTotalLength(),
+    progress: 0
+  };
+});
+
+function makeOrganicPath(blob, now) {
+  const points = [];
+  const phase = now * 0.00028 * blob.speed;
+  for (let index = 0; index < 14; index += 1) {
+    const angle = (index / 14) * Math.PI * 2;
+    const ripple = 1 + blob.amplitude * (
+      Math.sin(phase + index * 1.71) + Math.cos(phase * 0.72 + index * 2.15) * 0.38
+    );
+    points.push({
+      x: blob.x + Math.cos(angle) * blob.radius * ripple,
+      y: blob.y + Math.sin(angle) * blob.radius * 0.78 * ripple
+    });
+  }
+  const midpoint = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+  let path = `M ${midpoint(points[13], points[0]).x} ${midpoint(points[13], points[0]).y}`;
+  points.forEach((point, index) => {
+    const mid = midpoint(point, points[(index + 1) % points.length]);
+    path += ` Q ${point.x} ${point.y} ${mid.x} ${mid.y}`;
+  });
+  return `${path} Z`;
+}
+
+function updateSvgMotion(now) {
+  morphingBlobs.forEach((blob) => blob.element.setAttribute("d", makeOrganicPath(blob, now)));
+  circuitTraces.forEach((trace) => {
+    const bounds = trace.section.getBoundingClientRect();
+    const target = Math.max(0, Math.min(1, (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)));
+    trace.progress += (target - trace.progress) * 0.18;
+    if (Math.abs(target - trace.progress) < 0.001) trace.progress = target;
+    const point = trace.path.getPointAtLength(trace.length * trace.progress);
+    trace.path.style.strokeDasharray = `${trace.progress.toFixed(3)} 1`;
+    trace.packet.setAttribute("cx", point.x.toFixed(2));
+    trace.packet.setAttribute("cy", point.y.toFixed(2));
+    trace.packet.style.opacity = String(0.18 + Math.sin(trace.progress * Math.PI) * 0.82);
+  });
+}
 
 function resizeCanvas() {
   pixelRatio = Math.min(window.devicePixelRatio || 1, 1.4);
@@ -416,6 +560,7 @@ function drawCanvas(now, delta) {
   if (!context || !canvasRunning) return;
   context.clearRect(0, 0, canvasWidth, canvasHeight);
   scrollBlend += (scrollTarget - scrollBlend) * 0.025;
+  updateSvgMotion(now);
   const [red, green, blue] = scrollColor(scrollBlend);
   const time = now * 0.00012;
   const auroras = [
@@ -511,11 +656,10 @@ function drawCanvas(now, delta) {
   context.globalAlpha = 1;
 }
 
-function updateCursor(delta) {
+function updateCursor() {
   if (!cursor.classList.contains("is-visible")) return;
-  const ease = Math.min(1, delta * 11);
-  pointer.x += (pointer.targetX - pointer.x) * ease;
-  pointer.y += (pointer.targetY - pointer.y) * ease;
+  pointer.x = pointer.targetX;
+  pointer.y = pointer.targetY;
   cursor.style.transform = `translate3d(${pointer.x}px, ${pointer.y}px, 0)`;
 }
 
@@ -524,7 +668,7 @@ function motionTick(now) {
   const delta = Math.min((now - (lastFrameTime || now)) / 1000, 0.04);
   lastFrameTime = now;
   drawCanvas(now, delta);
-  updateCursor(delta);
+  updateCursor();
   if (canvasRunning || cursor.classList.contains("is-visible")) {
     motionFrame = window.requestAnimationFrame(motionTick);
   } else {
@@ -685,15 +829,33 @@ function setupScrollAnimations() {
 
   const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
   heroTimeline
-    .fromTo(".hero-copy", { autoAlpha: 0, y: 35 }, { autoAlpha: 1, y: 0, duration: 0.75 })
-    .fromTo(".hero-title-line", { autoAlpha: 0, y: 32, rotateX: -5, transformOrigin: "50% 100%" }, {
+    .fromTo(".hero-copy", { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.72 })
+    .fromTo(".hero-title-line", {
+      autoAlpha: 0,
+      y: 48,
+      rotateX: -8,
+      clipPath: "inset(0 0 100% 0)",
+      transformOrigin: "50% 100%"
+    }, {
       autoAlpha: 1,
       y: 0,
       rotateX: 0,
-      duration: 1,
-      stagger: 0.16,
+      clipPath: "inset(0 0 0% 0)",
+      duration: 1.08,
+      stagger: 0.17,
       ease: "power4.out"
-    }, "-=0.36")
+    }, "-=0.38")
+    .fromTo(".hero-description", {
+      autoAlpha: 0,
+      y: 18,
+      clipPath: "inset(0 0 100% 0)"
+    }, {
+      autoAlpha: 1,
+      y: 0,
+      clipPath: "inset(0 0 0% 0)",
+      duration: 0.82,
+      ease: "power3.out"
+    }, "-=0.55")
     .fromTo(".portrait-column", { autoAlpha: 0, x: compactLayout.matches ? 0 : 35, scale: 0.97 }, { autoAlpha: 1, x: 0, scale: 1, duration: 0.9, ease: "power3.out" }, "-=0.62");
   gsap.fromTo(".metric-card", { autoAlpha: 0, y: 16 }, {
     autoAlpha: 1,
@@ -727,24 +889,36 @@ function setupScrollAnimations() {
   });
 
   const skillsGrid = document.querySelector(".skills-grid");
-  gsap.fromTo(".skill-card", { autoAlpha: 0, y: 44, scale: 0.96 }, {
+  gsap.fromTo(".skill-card", { autoAlpha: 0, y: 42, scale: 0.94, rotationX: 8, rotationY: -5, transformPerspective: 900 }, {
     autoAlpha: 1,
     y: 0,
     scale: 1,
-    duration: 0.78,
-    stagger: 0.1,
+    rotationX: 0,
+    rotationY: 0,
+    duration: 0.84,
+    stagger: { each: 0.105, from: "start" },
     ease: "power3.out",
     clearProps: "transform",
     scrollTrigger: { trigger: skillsGrid, start: "top 82%", once: true }
   });
+  gsap.fromTo(".tech-marquee", { autoAlpha: 0, y: 24 }, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.7,
+    ease: "power3.out",
+    clearProps: "transform",
+    scrollTrigger: { trigger: ".tech-marquee", start: "top 90%", once: true }
+  });
 
   const projectsGrid = document.querySelector(".projects-grid");
-  gsap.fromTo(".project-card", { autoAlpha: 0, y: 55, scale: 0.97 }, {
+  gsap.fromTo(".project-card", { autoAlpha: 0, y: 52, scale: 0.95, rotationX: 7, rotationY: -4, transformPerspective: 1000 }, {
     autoAlpha: 1,
     y: 0,
     scale: 1,
-    duration: 0.9,
-    stagger: 0.16,
+    rotationX: 0,
+    rotationY: 0,
+    duration: 0.92,
+    stagger: { each: 0.16, from: "start" },
     ease: "power3.out",
     clearProps: "transform",
     scrollTrigger: { trigger: projectsGrid, start: "top 82%", once: true }
@@ -783,6 +957,28 @@ function updateMotionPreference() {
   if (reducedMotion.matches) {
     stopCanvas();
     stopMotionLoop();
+    window.cancelAnimationFrame(tiltFrame);
+    tiltFrame = 0;
+    lastTiltFrame = 0;
+    tiltStates.forEach((state, target) => {
+      state.active = false;
+      state.x = 0;
+      state.y = 0;
+      state.vx = 0;
+      state.vy = 0;
+      state.vgx = 0;
+      state.vgy = 0;
+      state.glareX = 50;
+      state.glareY = 50;
+      state.targetX = 0;
+      state.targetY = 0;
+      state.targetGlareX = 50;
+      state.targetGlareY = 50;
+      target.style.setProperty("--tilt-x", "0deg");
+      target.style.setProperty("--tilt-y", "0deg");
+      target.style.setProperty("--glare-x", "50%");
+      target.style.setProperty("--glare-y", "50%");
+    });
     cursor.classList.remove("is-visible", "has-label");
     root.classList.remove("has-custom-cursor");
     window.gsap?.killTweensOf("*");
@@ -798,11 +994,16 @@ function updateMotionPreference() {
 
 window.addEventListener("resize", updateScrollColor, { passive: true });
 document.addEventListener("visibilitychange", () => {
+  root.classList.toggle("page-hidden", document.hidden);
   if (document.hidden) {
     stopCanvas();
     stopMotionLoop();
+    window.cancelAnimationFrame(tiltFrame);
+    tiltFrame = 0;
+    lastTiltFrame = 0;
   } else {
     startCanvas();
+    if ([...tiltStates.values()].some((state) => state.active)) scheduleTiltFrame();
   }
 });
 reducedMotion.addEventListener("change", updateMotionPreference);
