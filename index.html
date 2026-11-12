@@ -3,18 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Rohan Kumar Mandla is a full-stack developer and AI enthusiast building thoughtful, useful digital experiences."
-    />
-    <meta name="theme-color" content="#10110f" />
-    <title>Rohan Kumar Mandla — Full-Stack Developer</title>
+    <meta name="description" content="Rohan Kumar Mandla — B.Tech Computer Science student at NIAT × Joy University, building thoughtful web applications and strengthening full-stack and DSA fundamentals." />
+    <meta name="theme-color" content="#070b14" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b14'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial,sans-serif' font-size='42' font-weight='700' fill='%234285f4'%3ER%3C/text%3E%3C/svg%3E" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rohan Kumar Mandla" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="https://rohankumarmandla22-commits.github.io/rohan-portfolio/" />
+    <meta property="og:title" content="Rohan Kumar Mandla — Software Engineering Portfolio" />
+    <meta property="og:description" content="B.Tech Computer Science student at NIAT × Joy University, building practical web applications and strengthening full-stack and DSA fundamentals." />
+    <meta property="og:image" content="https://github.com/rohankumarmandla22-commits.png" />
+    <meta property="og:image:alt" content="Rohan Kumar Mandla, B.Tech Computer Science student and software developer." />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Rohan Kumar Mandla — Software Engineering Portfolio" />
+    <meta name="twitter:description" content="B.Tech Computer Science student at NIAT × Joy University, building practical web applications and strengthening full-stack and DSA fundamentals." />
+    <meta name="twitter:image" content="https://github.com/rohankumarmandla22-commits.png" />
+    <meta name="twitter:image:alt" content="Rohan Kumar Mandla, B.Tech Computer Science student and software developer." />
+    <title>Rohan Kumar Mandla — Software Engineering Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
@@ -22,108 +31,110 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <canvas class="cosmic-canvas" id="cosmic-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <div class="custom-cursor" aria-hidden="true">
+      <span class="cursor-ring cursor-ring-outer"></span>
+      <span class="cursor-ring cursor-ring-inner"></span>
+      <span class="cursor-label"></span>
+    </div>
     <header class="site-header" id="top">
       <nav class="nav shell" aria-label="Main navigation">
-        <a class="brand" href="#top" aria-label="Rohan Kumar Mandla home">
-          <span class="brand-mark">r<span>.</span></span>
-          <span class="brand-name">rohan kumar mandla</span>
-        </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-          <span></span><span></span>
-        </button>
-        <div class="nav-links" id="nav-links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-          <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
-            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"></path></svg>
-          </button>
+        <a class="brand" href="#vision">Rohan Kumar Mandla<span class="brand-period">.</span></a>
+        <div class="nav-center">
+          <nav class="nav-links" aria-label="Portfolio sections">
+            <a href="#vision">Vision</a><a href="#skills">Capabilities</a><a href="#projects">Featured Work</a><a href="#story">Journey</a><a href="#contact">Contact</a>
+          </nav>
+          <p class="local-time"><span class="time-label">IST</span><time id="local-time" datetime="">--:--:--</time></p>
         </div>
+        <a class="hire-link" data-magnetic data-cursor="CONTACT" href="mailto:rohankumarmanda22@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
       </nav>
+      <div class="commandbar shell">
+        <button class="command-trigger" id="command-trigger" type="button" aria-expanded="false" aria-controls="command-prompts">
+          <span class="command-mark" aria-hidden="true">⌘</span>
+          <span class="command-prompt"><strong>Command Bar</strong><small>Press <kbd>/</kbd> or <kbd>⌘ K</kbd> to explore</small></span>
+          <span class="command-chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="command-prompts" id="command-prompts" aria-label="Portfolio quick actions" hidden>
+          <button type="button" data-command-filter="all"><span class="prompt-dot prompt-blue"></span>All capabilities</button>
+          <button type="button" data-command-filter="web"><span class="prompt-dot prompt-cyan"></span>Web engineering</button>
+          <a href="#projects"><span class="prompt-dot prompt-green"></span>Jump to live projects</a>
+          <button type="button" data-copy-email><span class="prompt-dot prompt-amber"></span>Copy email address</button>
+          <a href="#about"><span class="prompt-dot prompt-blue"></span>Inspect Rohan's profile</a>
+          <a href="#contact"><span class="prompt-dot prompt-cyan"></span>Open contact studio</a>
+        </div>
+      </div>
     </header>
 
     <main id="main">
-      <section class="hero shell" aria-labelledby="hero-title">
-        <canvas class="hero-particles" aria-hidden="true"></canvas>
-        <div class="cursor-follower" aria-hidden="true"><span></span></div>
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="status-dot"></span> AVAILABLE FOR INTERNSHIPS</div>
-          <p class="hero-intro">Hi, I'm <span>Rohan Kumar Mandla.</span></p>
-          <h1 id="hero-title" aria-label="Full-Stack Developer & AI Enthusiast" tabindex="0">
-            <span class="hero-title-line" aria-hidden="true"><span class="hero-word">Full-Stack</span> <span class="hero-word">Developer</span></span>
-            <span class="hero-title-line" aria-hidden="true"><span class="hero-word">&amp;</span> <span class="hero-word accent-text">AI</span> <span class="hero-word accent-text">Enthusiast</span></span>
-          </h1>
-          <p class="hero-role"><span class="role-label">I build</span> <span class="sr-only">Full-Stack Developer, Problem Solver, and AI Enthusiast</span><span class="typed-role" aria-hidden="true">useful products</span><span class="typing-cursor" aria-hidden="true"></span></p>
-          <p class="hero-bio">
-            I turn curious ideas into useful digital experiences.<br class="desktop-break" />
-            Currently studying computer science and building for the web.
-          </p>
+      <section class="hero shell" id="vision" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="student-badge"><span aria-hidden="true"></span> B.Tech Computer Science · NIAT × Joy University (2026–2030)</p>
+          <h1 id="hero-title"><span class="hero-title-line">Engineering thoughtful software</span><span class="hero-title-line"><em>with precision and curiosity.</em></span></h1>
+          <p class="hero-description">Hi, I'm Rohan Kumar Mandla — an aspiring AI &amp; Full-Stack Engineer building fast, interactive web applications.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#projects">View projects <span aria-hidden="true">↗</span></a>
-            <button class="button button-quiet resume-button" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"></path></svg>
-              Download resume
-            </button>
+            <a class="text-link" data-magnetic data-cursor="LAUNCH" href="#projects">Explore Flagship Work <span aria-hidden="true">↓</span></a>
+            <a class="text-link text-link-muted resume-link" data-magnetic data-cursor="OPEN" href="Rohan_Kumar_Mandla_Resume.pdf" download="Rohan_Kumar_Mandla_Resume.pdf">Download Resume <span aria-hidden="true">↓</span></a>
+            <a class="text-link text-link-muted" data-magnetic data-cursor="OPEN" href="https://github.com/rohankumarmandla22-commits" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="hero-socials" aria-label="Social links">
-            <a href="https://github.com" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-            <i aria-hidden="true"></i>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
-            <i aria-hidden="true"></i>
-            <a href="mailto:rohankumarmanda22@gmail.com">Email <span>↗</span></a>
-          </div>
+          <p class="hero-note"><span class="accent-bar"></span> CURIOUS BY NATURE. BUILDING AS I LEARN.</p>
         </div>
-        <div class="hero-art" aria-label="Interactive floating code terminal surrounded by technology badges">
-          <div class="art-grid"></div>
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
-          <div class="terminal-card">
-            <div class="terminal-header"><span class="card-dots"><i></i><i></i><i></i></span><span>ROHAN.DEV / TERMINAL</span><span class="terminal-live">● LIVE</span></div>
-            <div class="terminal-body">
-              <p><span class="terminal-prompt">~/portfolio $</span> <span class="terminal-command">build --future</span></p>
-              <p><span class="terminal-muted">const</span> ideas = <span class="terminal-cyan">curiosity</span>;</p>
-              <p><span class="terminal-muted">while</span> (learning) {</p>
-              <p class="terminal-indent">ship(ideas.<span class="terminal-lime">useful</span>());</p>
-              <p>}</p>
-              <div class="terminal-output"><span class="terminal-check">✓</span> ready for what's next<span class="terminal-caret"></span></div>
+
+        <div class="portrait-column reveal">
+          <div class="portrait-stage">
+            <figure class="portrait-frame has-fallback" tabindex="0" data-tilt data-cursor="OPEN">
+              <div class="portrait-image-wrap">
+                <img class="portrait-image" id="profile-image" data-src="profile.jpg" alt="Portrait of Rohan Kumar Mandla" />
+                <div class="portrait-fallback" aria-hidden="true"><span>RKM</span><small>PROFILE IMAGE NOT ADDED</small></div>
+                <span class="portrait-hint">HOVER TO REVEAL COLOR</span>
+              </div>
+              <figcaption class="portrait-caption"><span>ROHAN KUMAR MANDLA</span><span>B.TECH CSE · 2026–2030</span></figcaption>
+            </figure>
+            <div class="ai-status-card" data-tilt data-cursor="HOVER">
+              <div class="ai-card-header"><span class="ai-card-mark">R</span><span>LIVE GITHUB PULSE</span><span class="snapshot-year">API</span></div>
+              <div class="repo-telemetry">
+                <div><strong id="repo-count">3+</strong><span id="repo-count-label">DEPLOYED WEB APPS</span></div>
+                <div class="snapshot-visual" aria-hidden="true">
+                  <span class="snapshot-orbit orbit-one"></span><span class="snapshot-orbit orbit-two"></span>
+                  <span class="snapshot-core">RM</span><span class="snapshot-node node-blue"></span><span class="snapshot-node node-cyan"></span><span class="snapshot-node node-amber"></span>
+                </div>
+              </div>
+              <p class="repo-status" id="repo-status" role="status" aria-live="polite">Checking public repository count…</p>
+              <div class="snapshot-principles">
+                <div><span class="principle-index">01</span><span>Build with intent</span><i class="principle-blue"></i></div>
+                <div><span class="principle-index">02</span><span>Strengthen fundamentals</span><i class="principle-green"></i></div>
+                <div><span class="principle-index">03</span><span>Keep learning in motion</span><i class="principle-amber"></i></div>
+              </div>
+              <div class="ai-card-footer"><span>FULL-STACK</span><span>CS · DSA · AI</span></div>
             </div>
           </div>
-          <div class="tech-badge tech-html"><span>&lt;/&gt;</span> HTML</div>
-          <div class="tech-badge tech-js"><span>JS</span> JavaScript</div>
-          <div class="tech-badge tech-python"><span>Py</span> Python</div>
-          <div class="tech-badge tech-ai"><span>✳</span> AI</div>
-          <div class="tech-badge tech-git"><span>⑂</span> Git</div>
-          <div class="art-caption"><span>BUILD · EXPLORE · REPEAT</span><span>ROHAN / 2026</span></div>
         </div>
-        <a class="scroll-cue" href="#about"><span></span> SCROLL TO EXPLORE</a>
+        <div class="hero-metrics reveal" aria-label="Keynote metrics">
+          <article class="metric-card"><span class="metric-value metric-blue">03</span><span class="metric-label">Deployed Web Apps</span></article>
+          <article class="metric-card"><span class="metric-value">B.Tech CSE</span><span class="metric-label">Undergraduate · NIAT × Joy University</span></article>
+          <article class="metric-card"><span class="metric-value metric-cyan">Full-Stack</span><span class="metric-label">DSA &amp; AI workflow focus</span></article>
+          <a class="hero-scroll" href="#skills"><span class="scroll-line"></span> EXPLORE CAPABILITIES</a>
+        </div>
       </section>
 
       <section class="section about-section" id="about" aria-labelledby="about-title">
         <div class="shell">
           <div class="section-heading reveal">
-            <p class="section-kicker">A LITTLE ABOUT ME <span>01</span></p>
-            <h2 id="about-title">Building things, <span>learning always.</span></h2>
+            <p class="eyebrow"><span>01</span> VISION</p>
+            <h2 id="about-title">A thoughtful approach<br /><em>to building.</em></h2>
+            <p class="section-intro">B.Tech Computer Science student at NIAT × Joy University, Class of 2026–2030.</p>
           </div>
-          <div class="about-bento">
-            <article class="about-card about-bio reveal">
-              <div class="bento-card-head"><span class="bento-icon" aria-hidden="true">01</span><span class="detail-label">THE JOURNEY SO FAR</span><span class="bento-spark" aria-hidden="true">✳</span></div>
-              <h3>Learning by<br /><span>building and practicing.</span></h3>
-              <p class="large-copy">I'm Rohan Kumar Mandla, currently pursuing my B.Tech in Computer Science at JOY UNIVERSITY.</p>
-              <p>I'm building practical web applications and practicing Data Structures &amp; Algorithms to strengthen my full-stack development skills.</p>
-              <div class="bento-tags"><span>WEB APPLICATIONS</span><span>DSA PRACTICE</span></div>
+          <div class="about-grid">
+            <article class="about-copy reveal">
+              <p class="about-lead">I’m building my path in software engineering by turning what I learn into useful, carefully considered experiences.</p>
+              <p>I’m pursuing a B.Tech in Computer Science at NIAT × Joy University. Alongside my coursework, I build practical web applications, practice Data Structures &amp; Algorithms, and explore AI-assisted engineering workflows.</p>
+              <a class="about-link" href="#story">Explore my journey <span aria-hidden="true">↘</span></a>
             </article>
-            <article class="about-card about-stats reveal" aria-label="About highlights">
-              <div class="bento-card-head"><span class="bento-icon" aria-hidden="true">02</span><span class="detail-label">ABOUT HIGHLIGHTS</span></div>
-              <div class="stat-list">
-                <div class="stat-item"><span class="highlight-label">Education</span><span>B.Tech CSE — JOY UNIVERSITY</span></div>
-                <div class="stat-item"><span class="highlight-label">Projects Built</span><span>3 Deployed Web Apps</span></div>
-                <div class="stat-item"><span class="highlight-label">Current Focus</span><span>Full-Stack Web Development &amp; DSA</span></div>
-              </div>
-              <p class="stat-footnote"><span class="pulse-dot"></span> Currently studying and building.</p>
-            </article>
+            <div class="about-facts">
+              <article class="fact-card reveal"><span class="fact-index">01 / EDUCATION</span><h3>B.Tech Computer Science</h3><p>NIAT × Joy University · 2026–2030</p></article>
+              <article class="fact-card reveal"><span class="fact-index">02 / BUILDING</span><h3>Practical Web Applications</h3><p>Three deployed projects, built while learning.</p></article>
+              <article class="fact-card reveal"><span class="fact-index">03 / EXPLORING</span><h3>AI-Assisted Engineering</h3><p>Prompting, modern workflows, and stronger fundamentals.</p></article>
+            </div>
           </div>
         </div>
       </section>
@@ -131,123 +142,231 @@
       <section class="section skills-section" id="skills" aria-labelledby="skills-title">
         <div class="shell">
           <div class="section-heading reveal">
-            <p class="section-kicker">MY TOOLKIT <span>02</span></p>
-            <h2 id="skills-title">Tools of the <span>trade.</span></h2>
-            <p class="section-subtitle">A growing toolbox for bringing ideas to life.</p>
+            <p class="eyebrow"><span>02</span> CAPABILITIES</p>
+            <h2 id="skills-title">Clear fundamentals.<br /><em>Curious practice.</em></h2>
+            <p class="section-intro">A practical toolkit built through coursework, personal projects, and ongoing practice.</p>
           </div>
           <div class="skill-filters" role="group" aria-label="Filter skills">
-            <button type="button" class="skill-filter is-active" data-filter="all" aria-pressed="true">All <span>6</span></button>
-            <button type="button" class="skill-filter" data-filter="web" aria-pressed="false">Web Development <span>3</span></button>
-            <button type="button" class="skill-filter" data-filter="programming" aria-pressed="false">Programming &amp; DSA <span>2</span></button>
-            <button type="button" class="skill-filter" data-filter="tools" aria-pressed="false">Tools <span>1</span></button>
+            <button class="skill-filter is-active" type="button" data-filter="all" aria-pressed="true" data-cursor="EXPLORE">All Capabilities <span>06</span></button>
+            <button class="skill-filter" type="button" data-filter="web" aria-pressed="false" data-cursor="EXPLORE">Web Engineering <span>02</span></button>
+            <button class="skill-filter" type="button" data-filter="programming" aria-pressed="false" data-cursor="EXPLORE">Core CS &amp; Logic <span>02</span></button>
+            <button class="skill-filter" type="button" data-filter="tools" aria-pressed="false" data-cursor="EXPLORE">AI &amp; Workflow <span>02</span></button>
           </div>
-          <div class="skills-grid skill-catalog">
-            <article class="skill-card reveal" data-category="web">
-              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5-6 7 6 7M16 5l6 7-6 7M14 3l-4 18"/></svg></span><span class="skill-index">01 / WEB</span></div>
-              <h3>HTML5</h3><p>Markup for the Job Tracker &amp; Portfolio.</p>
-              <div class="skill-context"><span class="context-dot"></span><span>Used in Job Tracker &amp; Portfolio</span></div>
+          <div class="skills-grid">
+            <article class="skill-card reveal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="skill-detail-dialog" aria-expanded="false" data-projects="job-tracker sorting-visualizer study-planner" data-concepts="Semantic structure|Responsive CSS|Layout and motion" data-architecture="Semantic page structure pairs with responsive layouts and reduced-motion-aware interface effects." data-category="web" data-tilt data-cursor="EXPLORE">
+              <div class="skill-card-head"><span class="skill-icon">&lt;/&gt;</span><span class="skill-index">01 / FRONTEND</span></div>
+              <h3>HTML5 &amp; CSS3</h3><p>Responsive UI &amp; Animations</p>
+              <div class="skill-context"><span class="skill-context-dot"></span>Layouts and styling across my web projects</div>
             </article>
-            <article class="skill-card reveal" data-category="web">
-              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 9 5-1.5 11L12 22l-7.5-4L3 7l9-5Z"/><path d="m8 9 8 6m0-6-8 6"/></svg></span><span class="skill-index">02 / FRONTEND</span></div>
-              <h3>CSS3</h3><p>Styling and responsive layouts for web projects.</p>
-              <div class="skill-context"><span class="context-dot"></span><span>Used in Job Tracker &amp; Portfolio</span></div>
+            <article class="skill-card reveal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="skill-detail-dialog" aria-expanded="false" data-projects="job-tracker sorting-visualizer study-planner" data-concepts="DOM events|Application state|Interactive flows" data-architecture="Event handlers update visible UI state for filters, timers, dialogs, and project interactions." data-category="web" data-tilt data-cursor="EXPLORE">
+              <div class="skill-card-head"><span class="skill-icon">JS</span><span class="skill-index">02 / WEB LOGIC</span></div>
+              <h3>JavaScript ES6+</h3><p>Interactive Web Apps &amp; DOM Logic</p>
+              <div class="skill-context"><span class="skill-context-dot"></span>Job Tracker, Study Planner &amp; Visualizer</div>
             </article>
-            <article class="skill-card reveal" data-category="web">
-              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-2-13-3 18"/></svg></span><span class="skill-index">03 / FRONTEND</span></div>
-              <h3>JavaScript</h3><p>Browser interactions and application behavior.</p>
-              <div class="skill-context"><span class="context-dot"></span><span>App logic &amp; Sorting Visualizer</span></div>
+            <article class="skill-card reveal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="skill-detail-dialog" aria-expanded="false" data-projects="" data-concepts="Control flow|Functions|Problem decomposition" data-architecture="Scripting and problem decomposition are part of ongoing practice, not a feature claimed for a deployed portfolio app." data-category="programming" data-tilt data-cursor="EXPLORE">
+              <div class="skill-card-head"><span class="skill-icon">Py</span><span class="skill-index">03 / PROGRAMMING</span></div>
+              <h3>Python</h3><p>Scripting &amp; Problem Solving</p>
+              <div class="skill-context"><span class="skill-context-dot"></span>Programming practice and scripting</div>
             </article>
-            <article class="skill-card reveal" data-category="programming">
-              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5 3 12l5 7m8-14 5 7-5 7m-3-16-2 18"/></svg></span><span class="skill-index">04 / PROGRAMMING</span></div>
-              <h3>Python</h3><p>Used for scripting and learning through programming practice.</p>
-              <div class="skill-context"><span class="context-dot"></span><span>Scripting &amp; Problem Solving</span></div>
+            <article class="skill-card reveal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="skill-detail-dialog" aria-expanded="false" data-projects="sorting-visualizer" data-concepts="Sorting algorithms|Complexity comparisons|Visualized logic" data-architecture="Sorting logic drives the visualized array states, with adjustable size and animation speed." data-category="programming" data-tilt data-cursor="EXPLORE">
+              <div class="skill-card-head"><span class="skill-icon">O(n)</span><span class="skill-index">04 / COMPUTER SCIENCE</span></div>
+              <h3>Data Structures &amp; Algorithms</h3><p>Sorting &amp; Logic Visualization</p>
+              <div class="skill-context"><span class="skill-context-dot"></span>Practicing through my Sorting Visualizer</div>
             </article>
-            <article class="skill-card reveal" data-category="programming">
-              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-4 0-3.7 1.8-3.7 1.8v2h3.8v.8H6.8S4 7.3 4 12s2.5 4.7 2.5 4.7h1.5v-2s-.1-2.5 2.5-2.5h4.2s2.3 0 2.3-2.3V7S17.4 3 12 3Z"/><path d="M12.5 21c4 0 3.7-1.8 3.7-1.8v-2h-3.8v-.8h5.3s2.8.3 2.8-4.4-2.5-4.7-2.5-4.7h-1.5v2s.1 2.5-2.5 2.5h-4.2s-2.3 0-2.3 2.3V17s-.4 4 5 4Z"/></svg></span><span class="skill-index">05 / PROGRAMMING</span></div>
-              <h3>Data Structures &amp; Algorithms</h3><p>Practicing algorithmic problem solving.</p>
-              <div class="skill-context"><span class="context-dot"></span><span>Core Logic &amp; Sorting Visualizer</span></div>
+            <article class="skill-card reveal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="skill-detail-dialog" aria-expanded="false" data-projects="job-tracker sorting-visualizer study-planner" data-concepts="Version-control workflow|Repository organization|GitHub Pages publishing" data-architecture="Git tracks source changes; GitHub Pages serves the three static project deployments." data-category="tools" data-tilt data-cursor="EXPLORE">
+              <div class="skill-card-head"><span class="skill-icon">⑂</span><span class="skill-index">05 / DEV TOOLS</span></div>
+              <h3>Git &amp; GitHub Pages</h3><p>Version Control &amp; Live Pages Deployment</p>
+              <div class="skill-context"><span class="skill-context-dot"></span>Source control and publishing my projects</div>
             </article>
-            <article class="skill-card reveal" data-category="tools">
-              <div class="skill-card-top"><span class="skill-symbol skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 8v5a3 3 0 0 0 6 0V8m0 5 4 4"/></svg></span><span class="skill-index">06 / TOOLS</span></div>
-              <h3>Git &amp; GitHub</h3><p>Version control and publishing projects.</p>
-              <div class="skill-context"><span class="context-dot"></span><span>Version Control &amp; GitHub Pages</span></div>
+            <article class="skill-card reveal" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="skill-detail-dialog" aria-expanded="false" data-projects="" data-concepts="Prompt framing|AI-assisted iteration|Review and verification" data-architecture="AI-assisted development is an exploratory workflow, with output reviewed and tested rather than presented as a deployed AI feature." data-category="tools" data-tilt data-cursor="EXPLORE">
+              <div class="skill-card-head"><span class="skill-icon">✳</span><span class="skill-index">06 / AI WORKFLOWS</span></div>
+              <h3>AI-Assisted Engineering</h3><p>AI Tools &amp; Prompt Engineering</p>
+              <div class="skill-context"><span class="skill-context-dot"></span>Exploring practical ways to work with AI tools</div>
             </article>
-          </div>
-          <div class="skill-marquee" aria-label="Core technology stack">
-            <div class="skill-marquee-track" aria-hidden="true">
-              <span>HTML5</span><i>✳</i><span>CSS3</span><i>✳</i><span>JavaScript</span><i>✳</i><span>Python</span><i>✳</i><span>Data Structures &amp; Algorithms</span><i>✳</i><span>Git &amp; GitHub</span><i>✳</i>
-              <span>HTML5</span><i>✳</i><span>CSS3</span><i>✳</i><span>JavaScript</span><i>✳</i><span>Python</span><i>✳</i><span>Data Structures &amp; Algorithms</span><i>✳</i><span>Git &amp; GitHub</span><i>✳</i>
-            </div>
           </div>
         </div>
       </section>
+
+      <dialog class="skill-detail-dialog" id="skill-detail-dialog" aria-labelledby="skill-detail-title" aria-describedby="skill-detail-description">
+        <div class="skill-detail-topline"><span>ENGINEERING DEEP-DIVE</span><form method="dialog"><button class="skill-detail-close" type="submit" aria-label="Close skill details" autofocus>Close <span aria-hidden="true">×</span></button></form></div>
+        <p class="eyebrow"><span>↗</span> CAPABILITY / ARCHITECTURE</p>
+        <h2 id="skill-detail-title"></h2>
+        <p id="skill-detail-description"></p>
+        <h3 class="skill-detail-project-heading">Key concepts practiced</h3>
+        <ul class="skill-detail-concepts" id="skill-detail-concepts"></ul>
+        <h3 class="skill-detail-project-heading">Architectural decisions</h3>
+        <p class="skill-detail-architecture" id="skill-detail-architecture"></p>
+        <h3 class="skill-detail-project-heading">Related projects</h3>
+        <ul class="skill-detail-projects" id="skill-detail-projects"></ul>
+      </dialog>
 
       <section class="section projects-section" id="projects" aria-labelledby="projects-title">
         <div class="shell">
-          <div class="section-heading project-heading reveal">
-            <div><p class="section-kicker">SELECTED WORK <span>03</span></p><h2 id="projects-title">A few things I've <span>made.</span></h2></div>
-            <p class="section-subtitle">A mix of experiments, solutions, and lessons learned along the way.</p>
+          <div class="section-heading section-heading-row reveal">
+            <div>                        <p class="eyebrow"><span>03</span> FEATURED WORK</p><h2 id="projects-title">Built with care.<br /><em>Made to be used.</em></h2></div>
+            <p class="section-intro">Three live applications shaped by practical problems, thoughtful interfaces, and steady iteration.</p>
           </div>
           <div class="projects-grid">
-            <article class="project-card reveal">
-              <div class="project-visual visual-learning">
-                <div class="visual-top"><span>APPLICATION TRACKER</span><span>● ● ●</span></div>
-                <div class="learning-ui"><div class="learning-side"><b></b><i></i><i></i><i></i></div><div class="learning-main"><small>YOUR JOB SEARCH</small><strong>Every opportunity,<br />in one place.</strong><div class="lesson-row"><span>01</span><i></i><b>Applications</b><em>12</em></div><div class="lesson-row active"><span>02</span><i></i><b>Interviews</b><em>04</em></div><div class="lesson-row"><span>03</span><i></i><b>Offers</b><em>01</em></div></div></div>
-                <span class="project-number">01</span>
+            <article class="project-card project-card-wide reveal" data-tilt data-cursor="VIEW">
+              <a class="project-preview preview-jobs" href="https://rohankumarmandla22-commits.github.io/job-tracker/" target="_blank" rel="noopener noreferrer" aria-label="Open live Smart Internship and Job Tracker demo">
+                <span class="preview-label">LIVE PROJECT / 01</span>
+                <span class="preview-window">
+                  <span class="preview-bar"><i></i><i></i><i></i><b>job-tracker</b></span>
+                  <span class="job-preview-content"><span class="preview-nav">OVERVIEW&nbsp;&nbsp; APPLICATIONS&nbsp;&nbsp; ANALYTICS</span><strong>Keep your job search<br />moving forward.</strong><span class="job-columns"><i>Saved<br /><b>Applications</b></i><i>In progress<br /><b>Interviews</b></i><i>Next step<br /><b>Follow up</b></i></span></span>
+                </span>
+                <span class="preview-arrow" aria-hidden="true">↗</span>
+              </a>
+              <div class="project-copy">
+                <div class="project-heading-line"><span class="project-number">01</span><span class="project-kind">WEB APPLICATION</span></div>
+                <h3>Smart Internship<br />&amp; Job Tracker</h3>
+                <p>A responsive application dashboard with Kanban filters, summary analytics, and localStorage persistence.</p>
+                <p class="project-architecture">CLIENT-SIDE · BROWSER STORAGE</p>
+                <ul class="tech-list" aria-label="Architecture and technologies"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+                <div class="engineering-highlights">
+                  <p>ENGINEERING HIGHLIGHTS</p>
+                  <ul>
+                    <li>DOM-driven filters connect the application board with summary views.</li>
+                    <li>localStorage preserves application records between visits.</li>
+                  </ul>
+                </div>
+                <div class="project-links">
+                  <button class="project-preview-open" type="button" data-preview-title="Smart Internship &amp; Job Tracker" data-preview-url="https://rohankumarmandla22-commits.github.io/job-tracker/" aria-haspopup="dialog" data-cursor="LAUNCH">Instant Live Preview</button>
+                  <a href="https://rohankumarmandla22-commits.github.io/job-tracker/" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
+                  <a href="https://github.com/rohankumarmandla22-commits/job-tracker" target="_blank" rel="noopener noreferrer">Source Code <span>↗</span></a>
+                </div>
               </div>
-              <div class="project-info"><div class="project-title-line"><h3>Smart Internship &amp; Job Tracker</h3><span class="project-type">WEB APP</span></div><p>A responsive application tracking dashboard with Kanban filters, summary analytics, and localStorage persistence.</p><div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="project-links"><a href="https://rohankumarmandla22-commits.github.io/job-tracker/" target="_blank" rel="noreferrer">Live demo <span>↗</span></a><a href="https://github.com/rohankumarmandla22-commits/job-tracker" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></div></div>
             </article>
-            <article class="project-card reveal">
-              <div class="project-visual visual-tracker">
-                <div class="tracker-window"><div class="tracker-head"><span class="tracker-logo">↗</span><span>SORTING LAB / VISUALIZER</span><span>•••</span></div><div class="tracker-stats"><div><small>BUBBLE SORT</small><b>O(n²)</b></div><div><small>MERGE SORT</small><b>O(n log n)</b></div><div><small>ARRAY SIZE</small><b>32</b></div></div><div class="tracker-chart"><span style="height:34%"></span><span style="height:70%"></span><span style="height:42%"></span><span style="height:88%"></span><span style="height:56%"></span><span style="height:100%"></span><span style="height:72%"></span><span style="height:50%"></span><span style="height:78%"></span></div><div class="tracker-row"><span class="company-mark">↔</span><b>Compare</b><span>Array elements</span><em>LIVE</em></div><div class="tracker-row"><span class="company-mark purple">▶</span><b>Visualize</b><span>Sorting steps</span><em class="applied">READY</em></div></div>
-                <span class="project-number">02</span>
+            <article class="project-card reveal" data-tilt data-cursor="VIEW">
+              <a class="project-preview preview-sorting" href="https://rohankumarmandla22-commits.github.io/Algorithm-Sorting-Visualizer/" target="_blank" rel="noopener noreferrer" aria-label="Open live Algorithm and Sorting Visualizer">
+                <span class="preview-label">LIVE PROJECT / 02</span>
+                <span class="preview-window sorting-window">
+                  <span class="preview-bar"><i></i><i></i><i></i><b>sorting-lab</b></span>
+                  <span class="sorting-content"><span class="sorting-title">ALGORITHM VISUALIZER <b>● LIVE</b></span><span class="sorting-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="sorting-controls">BUBBLE SORT <b>▶ RUN</b></span></span>
+                </span>
+                <span class="preview-arrow" aria-hidden="true">↗</span>
+              </a>
+              <div class="project-copy">
+                <div class="project-heading-line"><span class="project-number">02</span><span class="project-kind">INTERACTIVE TOOL</span></div>
+                <h3>Algorithm &amp; Sorting<br />Visualizer</h3>
+                <p>Explore Bubble, Selection, Insertion, Merge, and Quick Sort with adjustable array size, animation speed, and complexity insights.</p>
+                <p class="project-architecture">ALGORITHM LOGIC · DOM ANIMATION</p>
+                <ul class="tech-list" aria-label="Architecture and technologies"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+                <div class="engineering-highlights">
+                  <p>ENGINEERING HIGHLIGHTS</p>
+                  <ul>
+                    <li>Five sorting algorithms are visualized against changing array states.</li>
+                    <li>Array size and animation speed are adjustable controls.</li>
+                  </ul>
+                </div>
+                <div class="project-links">
+                  <button class="project-preview-open" type="button" data-preview-title="Algorithm &amp; Sorting Visualizer" data-preview-url="https://rohankumarmandla22-commits.github.io/Algorithm-Sorting-Visualizer/" aria-haspopup="dialog" data-cursor="LAUNCH">Instant Live Preview</button>
+                  <a href="https://rohankumarmandla22-commits.github.io/Algorithm-Sorting-Visualizer/" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
+                  <a href="https://github.com/rohankumarmandla22-commits/Algorithm-Sorting-Visualizer" target="_blank" rel="noopener noreferrer">Source Code <span>↗</span></a>
+                </div>
               </div>
-              <div class="project-info"><div class="project-title-line"><h3>Algorithm &amp; Sorting Visualizer</h3><span class="project-type">INTERACTIVE TOOL</span></div><p>An interactive sorting visualizer for Bubble, Selection, Insertion, Merge, and Quick Sort, with adjustable array size and animation speed plus live time and space complexity insights.</p><div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="project-links"><a href="https://rohankumarmandla22-commits.github.io/Algorithm-Sorting-Visualizer/" target="_blank" rel="noreferrer">Live demo <span>↗</span></a><a href="https://github.com/rohankumarmandla22-commits/Algorithm-Sorting-Visualizer" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></div></div>
             </article>
-            <article class="project-card reveal">
-              <div class="project-visual visual-portfolio">
-                <div class="portfolio-browser"><div class="browser-bar"><i></i><i></i><i></i><span>focus.hub</span></div><div class="portfolio-page"><span class="portfolio-mini-brand">◷</span><span class="portfolio-mini-nav">FOCUS&nbsp;&nbsp; TASKS&nbsp;&nbsp; STREAK</span><small>YOUR DAILY FOCUS SESSION</small><strong>Make focus<br />a daily habit.</strong><div class="mini-button">START FOCUS ↗</div><div class="portfolio-orb"></div></div></div>
-                <span class="project-number">03</span>
+            <article class="project-card reveal" data-tilt data-cursor="VIEW">
+              <a class="project-preview preview-study" href="https://rohankumarmandla22-commits.github.io/AI-study-planner/" target="_blank" rel="noopener noreferrer" aria-label="Open live Study Planner and Pomodoro Focus Hub">
+                <span class="preview-label">LIVE PROJECT / 03</span>
+                <span class="preview-window study-window">
+                  <span class="preview-bar"><i></i><i></i><i></i><b>focus-hub</b></span>
+                  <span class="study-content"><span class="study-kicker">YOUR DAILY FOCUS SESSION</span><strong>Make focus<br />a daily habit.</strong><span class="pomodoro"><i>25:00</i><b>START FOCUS</b></span><span class="study-tasks">TODAY'S TASKS <i>03</i></span></span>
+                </span>
+                <span class="preview-arrow" aria-hidden="true">↗</span>
+              </a>
+              <div class="project-copy">
+                <div class="project-heading-line"><span class="project-number">03</span><span class="project-kind">PRODUCTIVITY APP</span></div>
+                <h3>Study Planner &amp;<br />Pomodoro Focus Hub</h3>
+                <p>A productivity dashboard with a customizable Pomodoro timer, priority task manager, and daily focus streak tracking.</p>
+                <p class="project-architecture">FOCUS TIMER · TASK MANAGEMENT</p>
+                <ul class="tech-list" aria-label="Architecture and technologies"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+                <div class="engineering-highlights">
+                  <p>ENGINEERING HIGHLIGHTS</p>
+                  <ul>
+                    <li>A customizable Pomodoro timer provides the focus-session flow.</li>
+                    <li>Priority tasks and a daily focus streak give the planner structure.</li>
+                  </ul>
+                </div>
+                <div class="project-links">
+                  <button class="project-preview-open" type="button" data-preview-title="Study Planner &amp; Pomodoro Focus Hub" data-preview-url="https://rohankumarmandla22-commits.github.io/AI-study-planner/" aria-haspopup="dialog" data-cursor="LAUNCH">Instant Live Preview</button>
+                  <a href="https://rohankumarmandla22-commits.github.io/AI-study-planner/" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
+                  <a href="https://github.com/rohankumarmandla22-commits/AI-study-planner" target="_blank" rel="noopener noreferrer">Source Code <span>↗</span></a>
+                </div>
               </div>
-              <div class="project-info"><div class="project-title-line"><h3>Study Planner &amp; Pomodoro Focus Hub</h3><span class="project-type">PRODUCTIVITY APP</span></div><p>A productivity dashboard with a customizable circular Pomodoro timer, priority task manager, and daily focus streak tracking saved via localStorage.</p><div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><div class="project-links"><a href="https://rohankumarmandla22-commits.github.io/AI-study-planner/" target="_blank" rel="noreferrer">Live demo <span>↗</span></a><a href="https://github.com/rohankumarmandla22-commits/AI-study-planner" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></div></div>
             </article>
           </div>
-          <p class="projects-note"><span>✳</span> More experiments are always in progress. <a href="https://github.com" target="_blank" rel="noreferrer">See what I'm exploring on GitHub ↗</a></p>
+          <p class="projects-endnote">A focused selection from my learning journey. <a href="https://github.com/rohankumarmandla22-commits" target="_blank" rel="noopener noreferrer">Explore the repositories ↗</a></p>
         </div>
       </section>
 
-      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="shell">
-          <div class="contact-panel">
-            <div class="contact-copy reveal">
-              <p class="section-kicker">LET'S CONNECT <span>04</span></p>
-              <h2 id="contact-title">Have a good one<br />in <span>mind?</span></h2>
-              <p>I'm always up for talking about interesting ideas, early-career opportunities, or what you're building. My inbox is open.</p>
-              <a class="email-link" href="mailto:rohankumarmanda22@gmail.com">rohankumarmanda22@gmail.com <span>↗</span></a>
-              <div class="contact-socials"><a href="https://github.com" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:rohankumarmanda22@gmail.com">Email ↗</a></div>
+      <dialog class="project-preview-dialog" id="project-preview-dialog" aria-labelledby="project-preview-title">
+        <div class="project-preview-dialog-head">
+          <div><p class="eyebrow"><span>↗</span> LIVE PRODUCT PREVIEW</p><h2 id="project-preview-title"></h2></div>
+          <button class="project-preview-close" type="button" aria-label="Close live project preview" autofocus>Close <span aria-hidden="true">×</span></button>
+        </div>
+        <iframe id="project-preview-frame" src="about:blank" title="Live project preview" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p class="project-preview-fallback">If the live site cannot be embedded, <a id="project-preview-external" href="#" target="_blank" rel="noopener noreferrer">open it in a new tab ↗</a>.</p>
+      </dialog>
+
+      <section class="section story-section" id="story" aria-labelledby="story-title">
+        <div class="shell story-layout">
+          <div class="story-heading reveal">
+            <p class="eyebrow"><span>04</span> JOURNEY &amp; VISION</p>
+            <h2 id="story-title">Learning by building.<br /><em>Building toward more.</em></h2>
+            <p class="section-intro">A clear foundation in Computer Science, grounded in projects and continued practice.</p>
+          </div>
+          <div class="story-journey">
+            <aside class="journey-stage-indicator" aria-live="polite" aria-label="Current journey stage">
+              <span>STAGE</span><strong id="journey-stage">01</strong><span>/ 03</span><small>Current focus</small>
+            </aside>
+            <div class="story-timeline">
+            <article class="story-stage reveal" data-stage="01">
+              <span class="timeline-marker" aria-hidden="true">01</span>
+              <div><p class="stage-date">2026 — 2030 <span>UNDERGRADUATE</span></p><h3>B.Tech Computer Science</h3><p class="stage-school">NIAT × Joy University</p><p>Developing strong engineering fundamentals through coursework and hands-on practice.</p></div>
+            </article>
+            <article class="story-stage reveal" data-stage="02">
+              <span class="timeline-marker" aria-hidden="true">02</span>
+              <div><p class="stage-date">NOW <span>BUILDING</span></p><h3>Practical Web Applications</h3><p>Creating and deploying my Job Tracker, Sorting Visualizer, and Study Planner.</p></div>
+            </article>
+            <article class="story-stage reveal" data-stage="03">
+              <span class="timeline-marker" aria-hidden="true">03</span>
+              <div><p class="stage-date">NEXT <span>ROADMAP</span></p><h3>Growing as an Engineer</h3><p>Deepening full-stack skills, problem-solving ability, and thoughtful use of AI tools.</p></div>
+            </article>
             </div>
-            <form class="contact-form reveal">
-              <div class="form-intro"><span class="pulse-dot"></span><span>Usually replies within a day</span></div>
-              <label for="contact-name">Your name</label>
-              <input id="contact-name" name="name" type="text" placeholder="Jane Smith" autocomplete="name" required />
-              <label for="contact-email">Email address</label>
-              <input id="contact-email" name="email" type="email" placeholder="jane@example.com" autocomplete="email" required />
-              <label for="contact-message">What's on your mind?</label>
-              <textarea id="contact-message" name="message" rows="4" placeholder="Tell me a little about it..." required></textarea>
-              <button class="button button-primary send-button" type="submit">Send a message <span>↗</span></button>
-              <p class="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="shell contact-inner reveal">
+          <p class="eyebrow"><span>05</span> CONTACT</p>
+          <h2 id="contact-title">Thoughtful work starts<br /><em>with a conversation.</em></h2>
+          <div class="contact-studio">
+            <div class="contact-details">
+              <a class="contact-email" href="mailto:rohankumarmanda22@gmail.com">rohankumarmanda22@gmail.com <span aria-hidden="true">↗</span></a>
+              <button class="copy-email-button" type="button" data-copy-email>Copy Email <span aria-hidden="true">⧉</span></button>
+              <div class="contact-bottom">
+                <p>Open to conversations about projects, learning, and early-career opportunities.</p>
+                <div class="social-links"><a data-magnetic href="https://github.com/rohankumarmandla22-commits" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a data-magnetic href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a data-magnetic href="mailto:rohankumarmanda22@gmail.com">Email ↗</a></div>
+              </div>
+            </div>
+            <form class="contact-form" id="contact-form" action="mailto:rohankumarmanda22@gmail.com" method="post" enctype="text/plain">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" name="name" autocomplete="name" required />
+              <label for="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" required />
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="4" required></textarea>
+              <button type="submit">Prepare Message <span aria-hidden="true">↗</span></button>
+              <p class="contact-feedback" id="contact-feedback" role="status" aria-live="polite"></p>
             </form>
           </div>
         </div>
       </section>
     </main>
     <footer class="site-footer">
-      <div class="shell footer-inner">
-        <a class="brand footer-brand" href="#top"><span class="brand-mark">r<span>.</span></span><span class="brand-name">rohan kumar mandla</span></a>
-        <p>Designed &amp; built with curiosity <span>✳</span></p>
-        <p>© <span id="current-year">2026</span> Rohan Kumar Mandla</p>
-        <a class="back-top" href="#top">BACK TO TOP ↑</a>
-      </div>
+      <div class="shell footer-inner"><a class="brand" href="#vision">Rohan Kumar Mandla<span class="brand-period">.</span></a><p>B.Tech CSE · NIAT × Joy University</p><a class="back-to-top" data-magnetic href="#vision">Back to top <span aria-hidden="true">↑</span></a></div>
     </footer>
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
   </body>
 </html>
