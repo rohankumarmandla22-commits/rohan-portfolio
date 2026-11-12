@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="One-page resume for Rohan Kumar Mandla, B.Tech Computer Science student at NIAT × Joy University." />
+    <title>Rohan Kumar Mandla | Resume</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #536176;
+        --blue: #245bc4;
+        --line: #d7dfeb;
+        --paper: #fff;
+      }
+      * { box-sizing: border-box; }
+      html { background: #edf1f7; }
+      body {
+        width: min(8.27in, calc(100% - 32px));
+        min-height: 11.69in;
+        margin: 24px auto;
+        padding: .56in .62in;
+        background: var(--paper);
+        color: var(--ink);
+        font: 10pt/1.45 Arial, Helvetica, sans-serif;
+        box-shadow: 0 12px 45px rgb(22 37 61 / 14%);
+      }
+      a { color: inherit; text-decoration: none; }
+      a:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+      .resume-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--ink);
+      }
+      h1 { margin: 0; font-size: 27pt; line-height: 1.05; letter-spacing: -.055em; }
+      .role { margin: 7px 0 0; color: var(--blue); font-size: 10pt; font-weight: 700; }
+      .contact {
+        display: grid;
+        justify-items: end;
+        gap: 3px;
+        color: var(--muted);
+        font-size: 8.4pt;
+        text-align: right;
+      }
+      section { margin-top: 15px; }
+      h2 {
+        margin: 0 0 7px;
+        color: var(--blue);
+        font-size: 9pt;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      p { margin: 0; }
+      .summary { color: #344259; }
+      .skills { display: flex; flex-wrap: wrap; gap: 5px 7px; }
+      .skills span {
+        padding: 3px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: #344259;
+        font-size: 8.2pt;
+        white-space: nowrap;
+      }
+      .projects { display: grid; gap: 11px; }
+      .project { padding-top: 9px; border-top: 1px solid var(--line); }
+      .project:first-child { padding-top: 0; border-top: 0; }
+      .project-heading { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+      h3 { margin: 0; font-size: 10.4pt; line-height: 1.3; }
+      .project-links { display: flex; flex: 0 0 auto; gap: 9px; color: var(--blue); font-size: 8pt; }
+      .project p { margin-top: 3px; color: var(--muted); font-size: 8.8pt; }
+      .project .stack { color: #3e4d63; font-size: 8pt; }
+      .education { display: flex; justify-content: space-between; gap: 16px; }
+      .education p { color: var(--muted); }
+      .date { flex: 0 0 auto; color: var(--muted); font-size: 8.5pt; }
+      .focus { margin-top: 5px; color: var(--muted); font-size: 8.8pt; }
+      .print-button {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        padding: 10px 15px;
+        border: 0;
+        border-radius: 7px;
+        background: var(--blue);
+        color: white;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .print-button:hover { background: #19499f; }
+      @media (max-width: 620px) {
+        body { width: calc(100% - 20px); min-height: 0; margin: 10px auto; padding: 26px 20px; }
+        .resume-header { flex-direction: column; gap: 10px; }
+        .contact { justify-items: start; text-align: left; }
+        .project-heading { align-items: flex-start; flex-direction: column; gap: 3px; }
+        .education { flex-direction: column; gap: 3px; }
+      }
+      @page { size: A4; margin: 0; }
+      @media print {
+        html, body { width: auto; min-height: 0; margin: 0; background: white; }
+        body { padding: .52in .58in; box-shadow: none; font-size: 9pt; }
+        section { margin-top: 12px; }
+        .print-button { display: none; }
+        a { color: inherit; }
+        .project-links a::after { content: ""; }
+        * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="resume-header">
+      <div>
+        <h1>Rohan Kumar Mandla</h1>
+        <p class="role">B.Tech Computer Science Student · Aspiring AI &amp; Full-Stack Engineer</p>
+      </div>
+      <div class="contact" aria-label="Contact details">
+        <a href="mailto:rohankumarmanda22@gmail.com">rohankumarmanda22@gmail.com</a>
+        <a href="https://github.com/rohankumarmandla22-commits">github.com/rohankumarmandla22-commits</a>
+        <a href="https://rohankumarmandla22-commits.github.io/rohan-portfolio/">Portfolio</a>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Profile</h2>
+        <p class="summary">Computer Science undergraduate at NIAT × Joy University, building practical web applications while strengthening full-stack development fundamentals and practicing Data Structures &amp; Algorithms. Interested in thoughtful interfaces, problem solving, and exploring AI-assisted engineering workflows.</p>
+      </section>
+
+      <section aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Technical Skills</h2>
+        <div class="skills">
+          <span>HTML5</span><span>CSS3</span><span>JavaScript ES6+</span><span>Python</span>
+          <span>Data Structures &amp; Algorithms</span><span>Git</span><span>GitHub Pages</span>
+          <span>AI Tools &amp; Prompt Engineering</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Selected Projects</h2>
+        <div class="projects">
+          <article class="project">
+            <div class="project-heading">
+              <h3>Smart Internship &amp; Job Tracker</h3>
+              <div class="project-links">
+                <a href="https://rohankumarmandla22-commits.github.io/job-tracker/">Live demo ↗</a>
+                <a href="https://github.com/rohankumarmandla22-commits/job-tracker">Source ↗</a>
+              </div>
+            </div>
+            <p>Responsive application dashboard with Kanban filters, summary analytics, and browser storage persistence.</p>
+            <p class="stack">HTML · CSS · JavaScript · localStorage</p>
+          </article>
+          <article class="project">
+            <div class="project-heading">
+              <h3>Algorithm &amp; Sorting Visualizer</h3>
+              <div class="project-links">
+                <a href="https://rohankumarmandla22-commits.github.io/Algorithm-Sorting-Visualizer/">Live demo ↗</a>
+                <a href="https://github.com/rohankumarmandla22-commits/Algorithm-Sorting-Visualizer">Source ↗</a>
+              </div>
+            </div>
+            <p>Interactive sorting demonstrations for Bubble, Selection, Insertion, Merge, and Quick Sort, with adjustable array size and animation speed.</p>
+            <p class="stack">HTML · CSS · JavaScript · Sorting Algorithms</p>
+          </article>
+          <article class="project">
+            <div class="project-heading">
+              <h3>Study Planner &amp; Pomodoro Focus Hub</h3>
+              <div class="project-links">
+                <a href="https://rohankumarmandla22-commits.github.io/AI-study-planner/">Live demo ↗</a>
+                <a href="https://github.com/rohankumarmandla22-commits/AI-study-planner">Source ↗</a>
+              </div>
+            </div>
+            <p>Productivity dashboard featuring a customizable Pomodoro timer, priority task manager, and daily focus streak tracking.</p>
+            <p class="stack">HTML · CSS · JavaScript</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="education-heading">
+        <h2 id="education-heading">Education &amp; Focus</h2>
+        <div class="education">
+          <div>
+            <h3>B.Tech in Computer Science</h3>
+            <p>NIAT × Joy University</p>
+          </div>
+          <p class="date">2026–2030</p>
+        </div>
+        <p class="focus"><strong>Current focus:</strong> Full-stack web development, algorithmic problem solving, practical projects, and AI-assisted engineering workflows.</p>
+      </section>
+    </main>
+
+    <button class="print-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+  </body>
+</html>

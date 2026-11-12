@@ -96,24 +96,6 @@ document.querySelectorAll("[data-copy-email]").forEach((button) => button.addEve
   if (commandPrompts.contains(button)) setCommandOpen(false, false);
 }));
 
-const resumeLink = document.querySelector(".resume-link");
-resumeLink.addEventListener("click", async (event) => {
-  event.preventDefault();
-  try {
-    const response = await fetch(resumeLink.href, { method: "HEAD" });
-    if (!response.ok) {
-      showToast("Resume PDF has not been uploaded yet.");
-      return;
-    }
-    const download = document.createElement("a");
-    download.href = resumeLink.href;
-    download.download = "Rohan_Kumar_Mandla_Resume.pdf";
-    download.click();
-  } catch {
-    showToast("Resume PDF is unavailable right now.");
-  }
-});
-
 const profileFrame = document.querySelector(".portrait-frame");
 const profileImage = document.querySelector("#profile-image");
 fetch(profileImage.dataset.src || "profile.jpg", { method: "HEAD" })
