@@ -11,6 +11,7 @@ const toast = document.querySelector("#site-toast");
 let toastTimeout = 0;
 
 function showToast(message) {
+  if (!toast) return;
   toast.textContent = message;
   toast.classList.add("is-visible");
   window.clearTimeout(toastTimeout);
@@ -98,14 +99,12 @@ document.querySelectorAll("[data-copy-email]").forEach((button) => button.addEve
 
 const profileFrame = document.querySelector(".portrait-frame");
 const profileImage = document.querySelector("#profile-image");
-fetch(profileImage.dataset.src || "profile.jpg", { method: "HEAD" })
-  .then((response) => {
-    if (!response.ok) return;
-    profileImage.src = profileImage.dataset.src || "profile.jpg";
-    profileImage.addEventListener("load", () => profileFrame.classList.remove("has-fallback"), { once: true });
-    profileImage.addEventListener("error", () => profileFrame.classList.add("has-fallback"), { once: true });
-  })
-  .catch(() => profileFrame.classList.add("has-fallback"));
+if (profileFrame && profileImage) {
+  profileFrame.classList.add("has-fallback");
+  profileImage.addEventListener("load", () => profileFrame.classList.remove("has-fallback"), { once: true });
+  profileImage.addEventListener("error", () => profileFrame.classList.add("has-fallback"), { once: true });
+  profileImage.src = profileImage.dataset.src || "profile.jpg";
+}
 
 const repoCount = document.querySelector("#repo-count");
 const repoCountLabel = document.querySelector("#repo-count-label");
@@ -127,7 +126,7 @@ fetch("https://api.github.com/users/rohankumarmandla22-commits", {
     repoStatus.textContent = "Live count from the public GitHub profile.";
   })
   .catch(() => {
-    repoCount.textContent = "3+";
+    repoCount.textContent = "4+";
     repoCountLabel.textContent = "DEPLOYED WEB APPS";
     repoStatus.textContent = "Showing deployed projects; live repository count is unavailable.";
   })
@@ -310,6 +309,10 @@ const skillProjects = {
   "study-planner": {
     title: "Study Planner & Pomodoro Focus Hub",
     href: "https://rohankumarmandla22-commits.github.io/AI-study-planner/"
+  },
+  "github-analyzer": {
+    title: "GitHub Developer & Repo Analyzer",
+    href: "https://rohankumarmandla22-commits.github.io/github-analyzer/"
   }
 };
 let activeSkillCard = null;
